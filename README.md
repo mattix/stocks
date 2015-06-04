@@ -1,7 +1,7 @@
 # Google Finance Stock Scraper
 https://github.com/mattix/stocks
 
-v.0.0.2
+Version: v.0.0.2
 
 Updated: 2015-06-04
  
