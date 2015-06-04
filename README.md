@@ -5,9 +5,9 @@ Version: v.0.0.2
 
 Updated: 2015-06-04
  
-Matti Ahinko
+Author: Matti Ahinko - matti (at) ahinko.net
 
-matti (at) ahinko.net
+## Disclaimer
 
 Use at your own risk.
 
