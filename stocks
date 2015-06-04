@@ -40,10 +40,7 @@ if len(sys.argv) > 1:
 				firstTime = False
 
 			for stock in jsonData:
-				if stock['c'].startswith('+'):
-					color = GREEN
-				else:
-					color = RED
+				color = RED if stock['c'].startswith('-') else GREEN
 				print('{0}:{1} {2} {3} {4} {5}%{6}'
 					.format(stock['e'], stock['t'], color, stock['l_cur'], stock['c'], stock['cp'], RESET))
 			time.sleep(INTERVAL)
