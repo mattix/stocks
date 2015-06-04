@@ -1,0 +1,54 @@
+#!/usr/bin/python
+# Google Finance Stock Scraper
+# v.0.0.2
+# Updated: 2015-06-04
+# 
+# Matti Ahinko
+# matti (at) ahinko.net
+#
+# Use at your own risk.
+# This script is under The MIT License (MIT)
+#
+# Please consult use disclaimer of Google Finance before
+# using this script
+#
+
+import sys, urllib.request, json
+import time
+
+RED = '\x1B[31;40m'
+GREEN = '\x1B[32;40m'
+RESET = '\x1B[m'
+CLEARLINE = "\033[F                                                                                                                    \r"
+# Update interval in seconds
+INTERVAL = 15
+
+firstTime = True
+
+if len(sys.argv) > 1:
+	try:
+		while True:
+			url = "http://finance.google.com/finance/info?client=ig&q={}"
+			count = len(sys.argv) - 1
+			response = urllib.request.urlopen(url.format(','.join(sys.argv[1:])))
+			jsonData = json.loads(response.read().decode("utf-8").replace('//', ''))
+
+			if not firstTime:
+				for i in range(0, count):
+					print(CLEARLINE, end="", flush=True)				
+			else:
+				firstTime = False
+
+			for stock in jsonData:
+				if stock['c'].startswith('+'):
+					color = GREEN
+				else:
+					color = RED
+				print('{0}:{1} {2} {3} {4} {5}%{6}'
+					.format(stock['e'], stock['t'], color, stock['l_cur'], stock['c'], stock['cp'], RESET))
+			time.sleep(INTERVAL)
+	except KeyboardInterrupt as e:
+		print('\nQuitting...')
+else:
+	print("Usage example: stock NASDAQ:AAPL NYSE:IBM NASDAQ:INTC")
+	print("Quit with CTRL+C")
